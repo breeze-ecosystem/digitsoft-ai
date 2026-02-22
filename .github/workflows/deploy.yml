@@ -1,0 +1,91 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-api:
+    name: Deploy API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build API
+        run: npx turbo build --filter=@digitsoft-ai/api
+
+      # TODO: Add deployment steps
+      # - name: Deploy to server
+      #   run: |
+      #     # Deployment commands here
+
+      - name: Build complete
+        run: echo "API build complete - deployment steps TODO"
+
+  deploy-web:
+    name: Deploy Web
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Web
+        run: npx turbo build --filter=@digitsoft-ai/web
+
+      # TODO: Add deployment steps
+      # - name: Deploy to Vercel/Netlify
+      #   run: |
+      #     # Deployment commands here
+
+      - name: Build complete
+        run: echo "Web build complete - deployment steps TODO"
+
+  deploy-mobile:
+    name: Deploy Mobile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Mobile
+        run: npx turbo build --filter=@digitsoft-ai/mobile
+
+      # TODO: Add deployment steps
+      # - name: Build Android APK
+      #   run: |
+      #     # EAS build commands here
+
+      # - name: Build iOS IPA
+      #   run: |
+      #     # EAS build commands here
+
+      - name: Build complete
+        run: echo "Mobile build complete - deployment steps TODO"
